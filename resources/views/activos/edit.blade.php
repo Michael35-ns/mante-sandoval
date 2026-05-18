@@ -1,0 +1,90 @@
+@extends('layouts.app')
+
+@section('content')
+
+
+    <div class="mb-6">
+        <h1 class="text-2xl font-bold text-gray-800">Editar Activo</h1>
+        <p class="text-sm text-gray-500 mt-1">Modificá los datos del equipo <span class="font-medium text-gray-700">{{ $activo->nombre }}</span>.</p>
+    </div>
+
+    <div class="bg-white rounded-xl shadow p-6">
+        <form action="{{ route('activos.update', $activo) }}" method="POST" class="space-y-5">
+            @csrf
+            @method('PUT')
+
+            <div>
+                <label for="codigo" class="block text-sm font-medium text-gray-700 mb-1">Código</label>
+                <input type="text" name="codigo" id="codigo"
+                       value="{{ old('codigo', $activo->codigo) }}"
+                       maxlength="20" required
+                       class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 @error('codigo') border-red-400 @enderror">
+                @error('codigo')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div>
+                <label for="nombre" class="block text-sm font-medium text-gray-700 mb-1">Nombre del equipo</label>
+                <input type="text" name="nombre" id="nombre"
+                       value="{{ old('nombre', $activo->nombre) }}"
+                       maxlength="100" required
+                       class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 @error('nombre') border-red-400 @enderror">
+                @error('nombre')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div>
+                <label for="area" class="block text-sm font-medium text-gray-700 mb-1">Área / Proceso</label>
+                <input type="text" name="area" id="area"
+                       value="{{ old('area', $activo->area) }}"
+                       maxlength="100" required
+                       class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 @error('area') border-red-400 @enderror">
+                @error('area')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div>
+                <label for="tipo" class="block text-sm font-medium text-gray-700 mb-1">Tipo de equipo</label>
+                <select name="tipo" id="tipo" required
+                        class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 @error('tipo') border-red-400 @enderror">
+                    @foreach(['Motor','Bomba','Compresor','Ventilador','Conveyor','Transformador','Generador','Banda','Otro'] as $tipo)
+                        <option value="{{ $tipo }}" {{ old('tipo', $activo->tipo) == $tipo ? 'selected' : '' }}>{{ $tipo }}</option>
+                    @endforeach
+                </select>
+                @error('tipo')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div>
+                <label for="estado" class="block text-sm font-medium text-gray-700 mb-1">Estado operativo</label>
+                <select name="estado" id="estado" required
+                        class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 @error('estado') border-red-400 @enderror">
+                    @foreach(['Activo','Fuera de servicio'] as $estado)
+                        <option value="{{ $estado }}" {{ old('estado', $activo->estado) == $estado ? 'selected' : '' }}>{{ $estado }}</option>
+                    @endforeach
+                </select>
+                @error('estado')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div class="flex items-center gap-3 pt-2">
+                <button type="submit"
+                        class="bg-yellow-500 hover:bg-yellow-600 text-white text-sm font-semibold px-5 py-2 rounded-lg transition">
+                    Actualizar
+                </button>
+                <a href="{{ route('activos.index') }}"
+                   class="text-sm text-gray-500 hover:text-gray-700 transition">
+                    Cancelar
+                </a>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+@endsection
