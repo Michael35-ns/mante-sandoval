@@ -25,7 +25,7 @@
                 CMMS
             </span>
             <nav class="flex items-center gap-3 text-sm">
-                <a href="{{ route('home') }}"
+                <a href="{{ route('activos.index') }}"
                    class="px-4 py-1.5 border border-[#19140035] dark:border-[#3E3E3A] hover:border-[#1915014a] dark:hover:border-[#62605b] rounded-sm text-[#1b1b18] dark:text-[#EDEDEC] leading-normal transition">
                     Iniciar
                 </a>
@@ -85,7 +85,7 @@
 
                 {{-- CTA --}}
                 <div class="flex gap-3">
-                    <a href="{{ route('home') }}"
+                    <a href="{{ route('activos.index') }}"
                        class="inline-block px-5 py-1.5 bg-[#1b1b18] dark:bg-[#eeeeec] border border-black dark:border-[#eeeeec] text-white dark:text-[#1C1C1A] hover:bg-black dark:hover:bg-white text-sm rounded-sm leading-normal transition">
                         Ir al panel
                     </a>
