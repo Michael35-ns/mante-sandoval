@@ -18,11 +18,8 @@
     </head>
     <body class="bg-[#FDFDFC] text-[#1b1b18] flex flex-col items-center justify-center min-h-screen p-6 lg:p-8">
 
-        {{-- Header con acceso --}}
         <header class="w-full max-w-4xl flex justify-between items-center mb-10">
-            <span class="text-lg font-semibold tracking-tight text-[#1b1b18]">
-                CMMS
-            </span>
+            <span class="text-lg font-semibold tracking-tight text-[#1b1b18]">CMMS</span>
             <nav class="flex items-center gap-3 text-sm">
                 <a href="{{ route('activos.index') }}"
                    class="px-4 py-1.5 border border-[#19140035] hover:border-[#1915014a] rounded-sm text-[#1b1b18] leading-normal transition">
@@ -31,12 +28,9 @@
             </nav>
         </header>
 
-        {{-- Contenido principal --}}
         <main class="w-full max-w-4xl flex flex-col lg:flex-row rounded-lg overflow-hidden shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)]">
 
-            {{-- Panel izquierdo: texto --}}
             <div class="flex-1 p-8 lg:p-16 bg-white flex flex-col justify-between">
-
                 <div>
                     <p class="text-xs font-semibold uppercase tracking-widest text-[#706f6c] mb-3">
                         Instituto Tecnológico de Costa Rica
@@ -49,14 +43,13 @@
                         y calcular automáticamente indicadores de confiabilidad como MTBF, MTTR y disponibilidad.
                     </p>
 
-                    {{-- Módulos --}}
                     <ul class="flex flex-col gap-3 mb-8">
                         @foreach([
-                            ['Activos', 'Registro y seguimiento de equipos industriales', 'activos.index'],
-                            ['Mantenimiento', 'Órdenes de trabajo correctivo, preventivo y predictivo', 'mantenimiento.index'],
-                            ['Paros', 'Control de tiempos de paro por equipo', 'paros.index'],
-                            ['Repuestos', 'Catálogo de materiales y costos de intervención', 'repuestos.index'],
-                        ] as [$titulo, $desc, $ruta])
+                            ['Activos', 'Registro y seguimiento de equipos industriales'],
+                            ['Mantenimiento', 'Órdenes de trabajo correctivo, preventivo y predictivo'],
+                            ['Paros', 'Control de tiempos de paro por equipo'],
+                            ['Repuestos', 'Catálogo de materiales y costos de intervención'],
+                        ] as [$titulo, $desc])
                         <li class="flex items-start gap-3 py-2 border-b border-[#e3e3e0] last:border-0">
                             <span class="mt-1 w-2 h-2 rounded-full bg-[#dbdbd7] shrink-0"></span>
                             <span class="text-sm text-[#1b1b18]">
@@ -68,7 +61,6 @@
                     </ul>
                 </div>
 
-                {{-- Indicadores destacados --}}
                 <div class="grid grid-cols-3 gap-3 mb-8">
                     @foreach([
                         ['MTBF', 'Mean Time Between Failures'],
@@ -82,7 +74,6 @@
                     @endforeach
                 </div>
 
-                {{-- CTA --}}
                 <div class="flex gap-3">
                     <a href="{{ route('activos.index') }}"
                        class="inline-block px-5 py-1.5 bg-[#1b1b18] border border-black text-white hover:bg-black text-sm rounded-sm leading-normal transition">
@@ -95,31 +86,25 @@
                 </div>
             </div>
 
-            {{-- Panel derecho: visual --}}
             <div class="bg-[#fff2f2] w-full lg:w-[380px] shrink-0 flex flex-col items-center justify-center p-10 gap-6 relative overflow-hidden">
 
-                {{-- Logo decorativo --}}
                 <svg class="w-full text-[#F53003] opacity-10 absolute inset-0 scale-150" viewBox="0 0 438 104" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M17.2036 -3H0V102.197H49.5189V86.7187H17.2036V-3Z" fill="currentColor"/>
                     <path d="M110.256 41.6337C108.061 38.1275 104.945 35.3731 100.905 33.3681C96.8667 31.3647 92.8016 30.3618 88.7131 30.3618C83.4247 30.3618 78.5885 31.3389 74.201 33.2923C69.8111 35.2456 66.0474 37.928 62.9059 41.3333C59.7643 44.7401 57.3198 48.6726 55.5754 53.1293C53.8287 57.589 52.9572 62.274 52.9572 67.1813C52.9572 72.1925 53.8287 76.8995 55.5754 81.3069C57.3191 85.7173 59.7636 89.6241 62.9059 93.0293C66.0474 96.4361 69.8119 99.1155 74.201 101.069C78.5885 103.022 83.4247 103.999 88.7131 103.999C92.8016 103.999 96.8667 102.997 100.905 100.994C104.945 98.9911 108.061 96.2359 110.256 92.7282V102.195H126.563V32.1642H110.256V41.6337Z" fill="currentColor"/>
                 </svg>
 
-                {{-- Cards de métricas decorativas --}}
-                <div class="relative z-10 w-full space-y-3">
-                    @foreach([
-                        ['Bomba B-01', 'MTBF', '312.5 h', '#16a34a'],
-                        ['Compresor C-01', 'Disponibilidad', '94.2%', '#2563eb'],
-                        ['Motor M-05', 'MTTR', '6.0 h', '#d97706'],
-                    ] as [$equipo, $indicador, $valor, $color])
+
+                    {{-- Costo total --}}
                     <div class="bg-white border border-[#e3e3e0] rounded-sm px-4 py-3 flex items-center justify-between shadow-sm">
                         <div>
-                            <p class="text-xs font-medium text-[#1b1b18]">{{ $equipo }}</p>
-                            <p class="text-[10px] text-[#706f6c]">{{ $indicador }}</p>
+                            <p class="text-xs font-medium text-[#1b1b18]">Todos los equipos</p>
+                            <p class="text-[10px] text-[#706f6c]">Costo total de mantenimiento</p>
                         </div>
-                        <p class="text-base font-bold" style="color: {{ $color }}">{{ $valor }}</p>
+                        <p class="text-base font-bold text-[#f53003]">
+                            ₡{{ number_format(\App\Models\OtRepuesto::sum('costo_total'), 0) }}
+                        </p>
                     </div>
-                    @endforeach
-                </div>
+
 
                 <div class="relative z-10 text-center">
                     <p class="text-[10px] text-[#706f6c] uppercase tracking-widest">

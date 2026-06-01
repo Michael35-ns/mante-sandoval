@@ -9,9 +9,18 @@ use Illuminate\Http\RedirectResponse;
 
 class ActivoController extends Controller
 {
-    public function index(): View
+    public function index(Request $request): View
     {
-        $activos = Activo::all();
+        $activos = Activo::query()
+            ->when($request->buscar, fn($q, $v) =>
+                $q->where('nombre', 'like', "%{$v}%")
+                  ->orWhere('codigo', 'like', "%{$v}%")
+            )
+            ->when($request->area,   fn($q, $v) => $q->where('area',   'like', "%{$v}%"))
+            ->when($request->tipo,   fn($q, $v) => $q->where('tipo',   $v))
+            ->when($request->estado, fn($q, $v) => $q->where('estado', $v))
+            ->get();
+
         return view('activos.index', compact('activos'));
     }
 
